@@ -15,7 +15,7 @@ export const faqs = [
     id: 3,
     question: "What is the batch size?",
     answer:
-      "We maintain a small batch size of 30-35 students to ensure personalized attention to each student. This helps in better interaction between teachers and students and allows for more effective doubt clearing.",
+      "We maintain a small batch size of 20-25 students to ensure personalized attention to each student. This helps in better interaction between teachers and students and allows for more effective doubt clearing.",
   },
   {
     id: 4,
@@ -31,8 +31,8 @@ export const faqs = [
   },
   {
     id: 6,
-    question: "Do you offer online classes?",
+    question: "Do you offer Home Tuition?",
     answer:
-      "Yes, we offer online classes for students who cannot attend in-person sessions. Our online platform provides the same quality of education with interactive sessions and regular assessments.",
+      "Yes, we offer home tuition for students who cannot attend in-person sessions. Our home tuition provides the same quality of education with interactive sessions and regular assessments.",
   },
 ];

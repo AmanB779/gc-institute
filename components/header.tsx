@@ -40,8 +40,8 @@ export default function Header() {
     >
       <div className="container flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2 group">
-          <span className="text-2xl font-bold text-primary transition-all duration-300 group-hover:scale-110">Excel</span>
-          <span className="text-2xl font-bold transition-all duration-300 group-hover:text-primary">Academy</span>
+          <span className="text-2xl font-bold text-primary transition-all duration-300 group-hover:scale-110">GC</span>
+          <span className="text-2xl font-bold transition-all duration-300 group-hover:text-primary">Institute</span>
         </Link>
         <nav className="hidden md:flex items-center space-x-8">
           {navigation.main.map((item) => (

@@ -15,6 +15,7 @@ export const navigation = {
     { name: "Manage Faculty", href: "/admin/dashboard/faculty" },
     { name: "Manage Notes", href: "/admin/dashboard/notes" },
     { name: "Manage Testimonials", href: "/admin/dashboard/testimonials" },
+    { name: "Content Management", href: "/admin/dashboard/content" },
     { name: "Settings", href: "/admin/dashboard/settings" },
   ],
   public: [

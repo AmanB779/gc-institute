@@ -13,15 +13,14 @@ export const stats = [
   },
   {
     id: 3,
-    value: "50+",
+    value: "5+",
     label: "Expert Teachers",
     icon: "graduationCap",
   },
   {
     id: 4,
-    value: "15+",
+    value: "10+",
     label: "Years Experience",
     icon: "calendar",
   },
-]
-
+];

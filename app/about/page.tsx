@@ -12,7 +12,7 @@ export default function AboutPage() {
       <Header />
       <main className="flex-1">
         <HeroSection
-          title="About Excel Academy"
+          title="About GC Institute"
           description="Empowering students to achieve academic excellence since 2008"
           image="/placeholder.svg?height=400&width=1200"
         />
@@ -23,11 +23,11 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold mb-6">Our Story</h2>
               <div className="space-y-4">
                 <p>
-                  Excel Academy was founded in 2008 by a group of passionate educators with a vision to transform the coaching landscape by providing quality
+                  GC Institute was founded in 2018 by a group of passionate educators with a vision to transform the coaching landscape by providing quality
                   education that focuses on conceptual understanding rather than rote learning.
                 </p>
                 <p>
-                  What started as a small institute with just 30 students has now grown into one of the most trusted names in coaching with over 1,200 students
+                  What started as a small institute with just 30 students has now grown into one of the most trusted names in coaching with over 500+ students
                   enrolling each year and a track record of producing top rankers in various competitive exams.
                 </p>
                 <p>
@@ -37,7 +37,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden">
-              <Image src="/placeholder.svg?height=400&width=600" alt="Excel Academy Building" fill className="object-cover" />
+              <Image src="/placeholder.svg?height=400&width=600" alt="GC Institute Building" fill className="object-cover" />
             </div>
           </div>
         </section>
@@ -108,32 +108,18 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                name: "Dr. Rajesh Kumar",
-                position: "Director & Physics Faculty",
-                experience: "15+ years",
+                name: "Prashant Rathore",
+                position: "Junior Wings Faculty",
+                experience: "5+ years",
                 image: "/placeholder.svg?height=300&width=300",
-                education: "PhD in Physics, IIT Delhi",
+                education: "B.Pharma ",
               },
               {
-                name: "Prof. Anita Sharma",
-                position: "Chemistry Faculty",
-                experience: "12+ years",
+                name: "Himanshi Goerya",
+                position: "BiologyFaculty",
+                experience: "5+ years",
                 image: "/placeholder.svg?height=300&width=300",
-                education: "MSc Chemistry, Delhi University",
-              },
-              {
-                name: "Dr. Sunil Verma",
-                position: "Mathematics Faculty",
-                experience: "14+ years",
-                image: "/placeholder.svg?height=300&width=300",
-                education: "PhD in Mathematics, IISc Bangalore",
-              },
-              {
-                name: "Dr. Priya Gupta",
-                position: "Biology Faculty",
-                experience: "10+ years",
-                image: "/placeholder.svg?height=300&width=300",
-                education: "MBBS, AIIMS Delhi",
+                education: "Neet Qualified",
               },
             ].map((faculty, index) => (
               <div key={index} className="bg-background rounded-lg overflow-hidden shadow-sm">
