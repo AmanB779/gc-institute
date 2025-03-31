@@ -12,7 +12,7 @@ export default function FounderPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
-        <HeroSection title="Meet Our Founder" description="The visionary behind GC Institute's success story" image="/placeholder.svg?height=400&width=1200" />
+        <HeroSection title="Meet Our Founder" description="The visionary behind GC Institute's success story" image="/hero-slide-1.jpg?height=400&width=1200" />
 
         <section className="py-16 container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

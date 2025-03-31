@@ -1,33 +1,33 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { toast } from "@/components/ui/use-toast"
-import { Toaster } from "@/components/ui/toaster"
-import { AlertCircle, Upload, FileText } from "lucide-react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import HeroSection from "@/components/hero-section"
-import { batches } from "@/db/data/batches"
-import { collection, addDoc, serverTimestamp } from "firebase/firestore"
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
-import { db, storage } from "@/lib/firebase"
-import { Card, CardContent } from "@/components/ui/card"
-import { motion } from "framer-motion"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { toast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
+import { AlertCircle, Upload, FileText } from "lucide-react";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import HeroSection from "@/components/hero-section";
+import { batches } from "@/db/data/batches";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "@/lib/firebase";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 export default function EnrollmentPage() {
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -44,164 +44,164 @@ export default function EnrollmentPage() {
     howDidYouHear: "",
     message: "",
     agreeToTerms: false,
-  })
-  const [documents, setDocuments] = useState<File[]>([])
-  const [profilePhoto, setProfilePhoto] = useState<File | null>(null)
-  const [profilePhotoPreview, setProfilePhotoPreview] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [step, setStep] = useState(1)
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  });
+  const [documents, setDocuments] = useState<File[]>([]);
+  const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
+  const [profilePhotoPreview, setProfilePhotoPreview] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState(1);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when field is edited
     if (errors[name]) {
       setErrors((prev) => {
-        const newErrors = { ...prev }
-        delete newErrors[name]
-        return newErrors
-      })
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
     }
-  }
+  };
 
   const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when field is edited
     if (errors[name]) {
       setErrors((prev) => {
-        const newErrors = { ...prev }
-        delete newErrors[name]
-        return newErrors
-      })
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
     }
-  }
+  };
 
   const handleCheckboxChange = (checked: boolean) => {
-    setFormData((prev) => ({ ...prev, agreeToTerms: checked }))
+    setFormData((prev) => ({ ...prev, agreeToTerms: checked }));
     // Clear error when field is edited
     if (errors.agreeToTerms) {
       setErrors((prev) => {
-        const newErrors = { ...prev }
-        delete newErrors.agreeToTerms
-        return newErrors
-      })
+        const newErrors = { ...prev };
+        delete newErrors.agreeToTerms;
+        return newErrors;
+      });
     }
-  }
+  };
 
   const handleProfilePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0]
-      setProfilePhoto(file)
+      const file = e.target.files[0];
+      setProfilePhoto(file);
 
       // Create preview
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target) {
-          setProfilePhotoPreview(event.target.result as string)
+          setProfilePhotoPreview(event.target.result as string);
         }
-      }
-      reader.readAsDataURL(file)
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   const handleDocumentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const newFiles = Array.from(e.target.files)
-      setDocuments((prev) => [...prev, ...newFiles])
+      const newFiles = Array.from(e.target.files);
+      setDocuments((prev) => [...prev, ...newFiles]);
     }
-  }
+  };
 
   const removeDocument = (index: number) => {
-    setDocuments((prev) => prev.filter((_, i) => i !== index))
-  }
+    setDocuments((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const validateStep = (stepNumber: number) => {
-    const newErrors: Record<string, string> = {}
+    const newErrors: Record<string, string> = {};
 
     if (stepNumber === 1) {
-      if (!formData.fullName.trim()) newErrors.fullName = "Full name is required"
+      if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
       if (!formData.email.trim()) {
-        newErrors.email = "Email is required"
+        newErrors.email = "Email is required";
       } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-        newErrors.email = "Email is invalid"
+        newErrors.email = "Email is invalid";
       }
       if (!formData.phone.trim()) {
-        newErrors.phone = "Phone number is required"
+        newErrors.phone = "Phone number is required";
       } else if (!/^\d{10}$/.test(formData.phone)) {
-        newErrors.phone = "Phone number must be 10 digits"
+        newErrors.phone = "Phone number must be 10 digits";
       }
-      if (!formData.parentName.trim()) newErrors.parentName = "Parent name is required"
+      if (!formData.parentName.trim()) newErrors.parentName = "Parent name is required";
       if (!formData.parentPhone.trim()) {
-        newErrors.parentPhone = "Parent phone is required"
+        newErrors.parentPhone = "Parent phone is required";
       } else if (!/^\d{10}$/.test(formData.parentPhone)) {
-        newErrors.parentPhone = "Phone number must be 10 digits"
+        newErrors.parentPhone = "Phone number must be 10 digits";
       }
     }
 
     if (stepNumber === 2) {
-      if (!formData.address.trim()) newErrors.address = "Address is required"
-      if (!formData.city.trim()) newErrors.city = "City is required"
-      if (!formData.state.trim()) newErrors.state = "State is required"
+      if (!formData.address.trim()) newErrors.address = "Address is required";
+      if (!formData.city.trim()) newErrors.city = "City is required";
+      if (!formData.state.trim()) newErrors.state = "State is required";
       if (!formData.pincode.trim()) {
-        newErrors.pincode = "Pincode is required"
+        newErrors.pincode = "Pincode is required";
       } else if (!/^\d{6}$/.test(formData.pincode)) {
-        newErrors.pincode = "Pincode must be 6 digits"
+        newErrors.pincode = "Pincode must be 6 digits";
       }
-      if (!formData.currentSchool.trim()) newErrors.currentSchool = "Current school is required"
-      if (!formData.currentClass.trim()) newErrors.currentClass = "Current class is required"
+      if (!formData.currentSchool.trim()) newErrors.currentSchool = "Current school is required";
+      if (!formData.currentClass.trim()) newErrors.currentClass = "Current class is required";
     }
 
     if (stepNumber === 3) {
-      if (!formData.interestedBatch) newErrors.interestedBatch = "Please select a batch"
-      if (!formData.howDidYouHear) newErrors.howDidYouHear = "Please select an option"
-      if (!formData.agreeToTerms) newErrors.agreeToTerms = "You must agree to the terms and conditions"
+      if (!formData.interestedBatch) newErrors.interestedBatch = "Please select a batch";
+      if (!formData.howDidYouHear) newErrors.howDidYouHear = "Please select an option";
+      if (!formData.agreeToTerms) newErrors.agreeToTerms = "You must agree to the terms and conditions";
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const nextStep = () => {
     if (validateStep(step)) {
-      setStep(step + 1)
-      window.scrollTo(0, 0)
+      setStep(step + 1);
+      window.scrollTo(0, 0);
     }
-  }
+  };
 
   const prevStep = () => {
-    setStep(step - 1)
-    window.scrollTo(0, 0)
-  }
+    setStep(step - 1);
+    window.scrollTo(0, 0);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!validateStep(step)) return
+    if (!validateStep(step)) return;
 
-    setLoading(true)
+    setLoading(true);
 
     try {
       // Upload profile photo if exists
-      let profilePhotoURL = null
+      let profilePhotoURL = null;
       if (profilePhoto) {
-        const storageRef = ref(storage, `profile-photos/${Date.now()}_${profilePhoto.name}`)
-        await uploadBytes(storageRef, profilePhoto)
-        profilePhotoURL = await getDownloadURL(storageRef)
+        const storageRef = ref(storage, `profile-photos/${Date.now()}_${profilePhoto.name}`);
+        await uploadBytes(storageRef, profilePhoto);
+        profilePhotoURL = await getDownloadURL(storageRef);
       }
 
       // Upload documents if any
-      const documentURLs = []
+      const documentURLs = [];
       for (const doc of documents) {
-        const storageRef = ref(storage, `documents/${Date.now()}_${doc.name}`)
-        await uploadBytes(storageRef, doc)
-        const url = await getDownloadURL(storageRef)
+        const storageRef = ref(storage, `documents/${Date.now()}_${doc.name}`);
+        await uploadBytes(storageRef, doc);
+        const url = await getDownloadURL(storageRef);
         documentURLs.push({
           name: doc.name,
           url: url,
           type: doc.type,
           size: doc.size,
-        })
+        });
       }
 
       // Add to Firestore
@@ -215,35 +215,35 @@ export default function EnrollmentPage() {
         schedule: null,
         startDate: null,
         notes: null,
-      })
+      });
 
       toast({
         title: "Enrollment Submitted!",
         description: "We've received your enrollment request. Our team will contact you shortly.",
         variant: "default",
-      })
+      });
 
       // Redirect to success page
       setTimeout(() => {
-        router.push("/enroll/success")
-      }, 2000)
+        router.push("/enroll/success");
+      }, 2000);
     } catch (error) {
-      console.error("Error submitting form:", error)
+      console.error("Error submitting form:", error);
       toast({
         title: "Submission Error",
         description: "There was a problem submitting your enrollment. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   // Animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -252,7 +252,7 @@ export default function EnrollmentPage() {
         <HeroSection
           title="Enroll Now"
           description="Join Excel Academy and start your journey towards academic excellence"
-          image="/placeholder.svg?height=400&width=1200"
+          image="/hero-slide-1.jpg?height=400&width=1200"
         />
 
         <section className="py-12 container">
@@ -269,23 +269,13 @@ export default function EnrollmentPage() {
                   >
                     <div
                       className={`h-12 w-12 rounded-full flex items-center justify-center text-lg font-bold mb-2 transition-all duration-300 ${
-                        step === stepNumber
-                          ? "bg-primary text-white"
-                          : step > stepNumber
-                            ? "bg-primary/20 text-primary"
-                            : "bg-muted text-muted-foreground"
+                        step === stepNumber ? "bg-primary text-white" : step > stepNumber ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"
                       }`}
                     >
                       {stepNumber}
                     </div>
-                    <span
-                      className={`text-sm font-medium ${step === stepNumber ? "text-primary" : "text-muted-foreground"}`}
-                    >
-                      {stepNumber === 1
-                        ? "Personal Info"
-                        : stepNumber === 2
-                          ? "Address & Education"
-                          : "Course Selection"}
+                    <span className={`text-sm font-medium ${step === stepNumber ? "text-primary" : "text-muted-foreground"}`}>
+                      {stepNumber === 1 ? "Personal Info" : stepNumber === 2 ? "Address & Education" : "Course Selection"}
                     </span>
                   </motion.div>
                 ))}
@@ -301,10 +291,7 @@ export default function EnrollmentPage() {
             </div>
 
             <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-8 bg-background p-8 rounded-xl shadow-sm border border-border/40"
-              >
+              <form onSubmit={handleSubmit} className="space-y-8 bg-background p-8 rounded-xl shadow-sm border border-border/40">
                 {step === 1 && (
                   <div className="space-y-6">
                     <h2 className="text-2xl font-bold">Personal Information</h2>
@@ -337,31 +324,17 @@ export default function EnrollmentPage() {
                           <div className="flex flex-col items-center">
                             <div className="relative h-24 w-24 rounded-full overflow-hidden border-2 border-primary/20 mb-2">
                               {profilePhotoPreview ? (
-                                <Image
-                                  src={profilePhotoPreview || "/placeholder.svg"}
-                                  alt="Profile Preview"
-                                  fill
-                                  className="object-cover"
-                                />
+                                <Image src={profilePhotoPreview || "/placeholder.svg"} alt="Profile Preview" fill className="object-cover" />
                               ) : (
                                 <div className="h-full w-full bg-muted flex items-center justify-center">
                                   <FileText className="h-8 w-8 text-muted-foreground" />
                                 </div>
                               )}
                             </div>
-                            <Label
-                              htmlFor="profilePhoto"
-                              className="cursor-pointer text-xs text-primary hover:underline"
-                            >
+                            <Label htmlFor="profilePhoto" className="cursor-pointer text-xs text-primary hover:underline">
                               Upload Photo
                             </Label>
-                            <Input
-                              id="profilePhoto"
-                              type="file"
-                              accept="image/*"
-                              className="hidden"
-                              onChange={handleProfilePhotoChange}
-                            />
+                            <Input id="profilePhoto" type="file" accept="image/*" className="hidden" onChange={handleProfilePhotoChange} />
                           </div>
                         </div>
                       </div>
@@ -567,10 +540,7 @@ export default function EnrollmentPage() {
                           <Label htmlFor="currentClass">
                             Current Class/Year <span className="text-red-500">*</span>
                           </Label>
-                          <Select
-                            value={formData.currentClass}
-                            onValueChange={(value) => handleSelectChange("currentClass", value)}
-                          >
+                          <Select value={formData.currentClass} onValueChange={(value) => handleSelectChange("currentClass", value)}>
                             <SelectTrigger id="currentClass" className={errors.currentClass ? "border-red-500" : ""}>
                               <SelectValue placeholder="Select your current class/year" />
                             </SelectTrigger>
@@ -599,45 +569,27 @@ export default function EnrollmentPage() {
                           <CardContent className="p-4">
                             <div className="flex flex-col items-center justify-center py-4">
                               <Upload className="h-10 w-10 text-muted-foreground mb-2" />
-                              <p className="text-sm text-muted-foreground mb-1">
-                                Drag and drop files here or click to browse
-                              </p>
-                              <p className="text-xs text-muted-foreground mb-4">
-                                Upload previous marksheets, certificates or any other relevant documents
-                              </p>
+                              <p className="text-sm text-muted-foreground mb-1">Drag and drop files here or click to browse</p>
+                              <p className="text-xs text-muted-foreground mb-4">Upload previous marksheets, certificates or any other relevant documents</p>
                               <Label
                                 htmlFor="documents"
                                 className="cursor-pointer bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
                               >
                                 Browse Files
                               </Label>
-                              <Input
-                                id="documents"
-                                type="file"
-                                multiple
-                                className="hidden"
-                                onChange={handleDocumentChange}
-                              />
+                              <Input id="documents" type="file" multiple className="hidden" onChange={handleDocumentChange} />
                             </div>
 
                             {documents.length > 0 && (
                               <div className="mt-4 space-y-2">
                                 <p className="text-sm font-medium">Uploaded Documents:</p>
                                 {documents.map((doc, index) => (
-                                  <div
-                                    key={index}
-                                    className="flex items-center justify-between bg-muted/50 p-2 rounded-md"
-                                  >
+                                  <div key={index} className="flex items-center justify-between bg-muted/50 p-2 rounded-md">
                                     <div className="flex items-center">
                                       <FileText className="h-4 w-4 mr-2 text-primary" />
                                       <span className="text-sm truncate max-w-[200px]">{doc.name}</span>
                                     </div>
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      className="h-6 w-6 p-0 text-red-500"
-                                      onClick={() => removeDocument(index)}
-                                    >
+                                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-red-500" onClick={() => removeDocument(index)}>
                                       ×
                                     </Button>
                                   </div>
@@ -661,14 +613,8 @@ export default function EnrollmentPage() {
                         <Label htmlFor="interestedBatch">
                           Interested Batch <span className="text-red-500">*</span>
                         </Label>
-                        <Select
-                          value={formData.interestedBatch}
-                          onValueChange={(value) => handleSelectChange("interestedBatch", value)}
-                        >
-                          <SelectTrigger
-                            id="interestedBatch"
-                            className={errors.interestedBatch ? "border-red-500" : ""}
-                          >
+                        <Select value={formData.interestedBatch} onValueChange={(value) => handleSelectChange("interestedBatch", value)}>
+                          <SelectTrigger id="interestedBatch" className={errors.interestedBatch ? "border-red-500" : ""}>
                             <SelectValue placeholder="Select a batch" />
                           </SelectTrigger>
                           <SelectContent>
@@ -786,19 +732,11 @@ export default function EnrollmentPage() {
                   )}
 
                   {step < 3 ? (
-                    <Button
-                      type="button"
-                      onClick={nextStep}
-                      className="rounded-full bg-gradient-to-r from-primary to-secondary"
-                    >
+                    <Button type="button" onClick={nextStep} className="rounded-full bg-gradient-to-r from-primary to-secondary">
                       Next
                     </Button>
                   ) : (
-                    <Button
-                      type="submit"
-                      className="rounded-full bg-gradient-to-r from-primary to-secondary"
-                      disabled={loading}
-                    >
+                    <Button type="submit" className="rounded-full bg-gradient-to-r from-primary to-secondary" disabled={loading}>
                       {loading ? (
                         <>
                           <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
@@ -818,6 +756,5 @@ export default function EnrollmentPage() {
       <Footer />
       <Toaster />
     </div>
-  )
+  );
 }
-

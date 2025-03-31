@@ -14,7 +14,7 @@ export default function AboutPage() {
         <HeroSection
           title="About GC Institute"
           description="Empowering students to achieve academic excellence since 2008"
-          image="/placeholder.svg?height=400&width=1200"
+          image="/hero-slide-1.jpg?height=400&width=1200"
         />
 
         <section className="py-12 container">

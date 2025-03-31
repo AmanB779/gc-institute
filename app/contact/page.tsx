@@ -21,7 +21,7 @@ export default function ContactPage() {
         <HeroSection
           title="Contact Us"
           description="Get in touch with us for any queries or to schedule a visit"
-          image="/placeholder.svg?height=400&width=1200"
+          image="/hero-slide-1.jpg?height=400&width=1200"
         />
 
         <section className="py-20">

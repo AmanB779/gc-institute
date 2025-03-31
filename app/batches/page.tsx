@@ -1,11 +1,11 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import HeroSection from "@/components/hero-section"
-import BatchCard from "@/components/batch-card"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import HeroSection from "@/components/hero-section";
+import BatchCard from "@/components/batch-card";
 
 export default function BatchesPage() {
   return (
@@ -15,7 +15,7 @@ export default function BatchesPage() {
         <HeroSection
           title="Our Batches"
           description="Specialized batches designed for different competitive exams and academic needs"
-          image="/placeholder.svg?height=400&width=1200"
+          image="/hero-slide-1.jpg?height=400&width=1200"
         />
 
         <section className="py-12 container">
@@ -137,9 +137,7 @@ export default function BatchesPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg">Concept Building</h3>
-                      <p className="text-muted-foreground">
-                        Strong focus on building fundamental concepts through interactive teaching.
-                      </p>
+                      <p className="text-muted-foreground">Strong focus on building fundamental concepts through interactive teaching.</p>
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -148,9 +146,7 @@ export default function BatchesPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg">Problem Solving</h3>
-                      <p className="text-muted-foreground">
-                        Extensive practice with graded problems to develop problem-solving skills.
-                      </p>
+                      <p className="text-muted-foreground">Extensive practice with graded problems to develop problem-solving skills.</p>
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -159,9 +155,7 @@ export default function BatchesPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg">Regular Assessment</h3>
-                      <p className="text-muted-foreground">
-                        Weekly tests to evaluate progress and identify areas for improvement.
-                      </p>
+                      <p className="text-muted-foreground">Weekly tests to evaluate progress and identify areas for improvement.</p>
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -170,20 +164,13 @@ export default function BatchesPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg">Personalized Attention</h3>
-                      <p className="text-muted-foreground">
-                        Individual attention to each student to address specific learning needs.
-                      </p>
+                      <p className="text-muted-foreground">Individual attention to each student to address specific learning needs.</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="relative h-[400px] rounded-lg overflow-hidden">
-                <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="Teaching Methodology"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/placeholder.svg?height=400&width=600" alt="Teaching Methodology" fill className="object-cover" />
               </div>
             </div>
           </div>
@@ -267,8 +254,7 @@ export default function BatchesPage() {
           <div className="container text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Join Our Batches?</h2>
             <p className="max-w-2xl mx-auto mb-8">
-              Enroll now to secure your seat in our limited-size batches and start your journey towards academic
-              excellence.
+              Enroll now to secure your seat in our limited-size batches and start your journey towards academic excellence.
             </p>
             <Button variant="secondary" size="lg" asChild>
               <Link href="/contact">Contact Us for Enrollment</Link>
@@ -278,6 +264,5 @@ export default function BatchesPage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
-

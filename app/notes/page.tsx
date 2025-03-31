@@ -20,7 +20,7 @@ export default function NotesPage() {
         <HeroSection
           title="Study Notes & Materials"
           description="Access comprehensive study materials prepared by our expert faculty"
-          image="/placeholder.svg?height=400&width=1200"
+          image="/hero-slide-1.jpg?height=400&width=1200"
         />
 
         <section className="py-20">

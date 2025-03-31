@@ -1,11 +1,11 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import HeroSection from "@/components/hero-section"
-import TopperCard from "@/components/topper-card"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import HeroSection from "@/components/hero-section";
+import TopperCard from "@/components/topper-card";
 
 export default function ToppersPage() {
   return (
@@ -15,15 +15,15 @@ export default function ToppersPage() {
         <HeroSection
           title="Our Toppers"
           description="Meet the brilliant minds who achieved extraordinary results with our guidance"
-          image="/placeholder.svg?height=400&width=1200"
+          image="/hero-slide-1.jpg?height=400&width=1200"
         />
 
         <section className="py-12 container">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold">Our Pride, Our Success Stories</h2>
             <p className="text-muted-foreground mt-2 max-w-3xl mx-auto">
-              At Excel Academy, we take immense pride in the achievements of our students. Their success is a testament
-              to their hard work and our effective teaching methodology.
+              At Excel Academy, we take immense pride in the achievements of our students. Their success is a testament to their hard work and our effective
+              teaching methodology.
             </p>
           </div>
 
@@ -183,12 +183,7 @@ export default function ToppersPage() {
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="relative h-[400px] rounded-lg overflow-hidden">
-                <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="Success Stories"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/placeholder.svg?height=400&width=600" alt="Success Stories" fill className="object-cover" />
               </div>
               <div>
                 <h2 className="text-3xl font-bold mb-6">Our Success Metrics</h2>
@@ -239,8 +234,7 @@ export default function ToppersPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Toppers' Gallery</h2>
             <p className="text-muted-foreground max-w-3xl mx-auto">
-              Celebrating the achievements of our brilliant students who have made us proud with their exceptional
-              performance in various competitive exams.
+              Celebrating the achievements of our brilliant students who have made us proud with their exceptional performance in various competitive exams.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -266,8 +260,8 @@ export default function ToppersPage() {
           <div className="container text-center">
             <h2 className="text-3xl font-bold mb-4">Want to Be Our Next Topper?</h2>
             <p className="max-w-2xl mx-auto mb-8">
-              Join Excel Academy today and take the first step towards achieving your academic dreams. Our proven
-              methodology and expert faculty are here to guide you.
+              Join Excel Academy today and take the first step towards achieving your academic dreams. Our proven methodology and expert faculty are here to
+              guide you.
             </p>
             <Button variant="secondary" size="lg" asChild>
               <Link href="/contact">Enroll Now</Link>
@@ -277,6 +271,5 @@ export default function ToppersPage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
-
