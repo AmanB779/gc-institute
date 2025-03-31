@@ -1,11 +1,16 @@
-import Link from "next/link"
-import { MapPin, Phone, Mail, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import HomeSlider from "@/components/home-slider"
-import TestimonialCard from "@/components/testimonial-card"
-import BatchCard from "@/components/batch-card"
+import Link from "next/link";
+import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import HomeSlider from "@/components/home-slider";
+import TestimonialCard from "@/components/testimonial-card";
+import BatchCard from "@/components/batch-card";
+import { batches } from "@/db/data/batches";
+import { testimonials } from "@/db/data/testimonials";
+import { stats } from "@/db/data/stats";
+import { features } from "@/db/data/features";
+import { contactInfo } from "@/db/data/contact";
 
 export default function Home() {
   return (
@@ -20,22 +25,12 @@ export default function Home() {
         {/* Quick Stats */}
         <section className="bg-gradient-to-r from-primary/5 to-secondary/5 py-16">
           <div className="container grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-sm border border-primary/10 hover-card">
-              <h3 className="text-5xl font-bold gradient-text mb-2">1200+</h3>
-              <p className="text-muted-foreground">Students Enrolled</p>
-            </div>
-            <div className="p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-sm border border-primary/10 hover-card">
-              <h3 className="text-5xl font-bold gradient-text mb-2">95%</h3>
-              <p className="text-muted-foreground">Success Rate</p>
-            </div>
-            <div className="p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-sm border border-primary/10 hover-card">
-              <h3 className="text-5xl font-bold gradient-text mb-2">50+</h3>
-              <p className="text-muted-foreground">Expert Teachers</p>
-            </div>
-            <div className="p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-sm border border-primary/10 hover-card">
-              <h3 className="text-5xl font-bold gradient-text mb-2">15+</h3>
-              <p className="text-muted-foreground">Years Experience</p>
-            </div>
+            {stats.map((stat) => (
+              <div key={stat.id} className="p-6 bg-white/50 dark:bg-background/50 backdrop-blur-sm rounded-xl shadow-sm border border-primary/10 hover-card">
+                <h3 className="text-5xl font-bold gradient-text mb-2">{stat.value}</h3>
+                <p className="text-muted-foreground">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -49,41 +44,27 @@ export default function Home() {
               <p className="text-muted-foreground">Join our specialized batches for guaranteed success</p>
             </div>
             <Link href="/batches" className="mt-4 md:mt-0 flex items-center text-primary hover:underline group">
-              View All Batches{" "}
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              View All Batches <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <BatchCard
-              title="JEE Advanced"
-              description="Comprehensive preparation for JEE Advanced with focus on problem-solving techniques."
-              image="/placeholder.svg?height=200&width=400"
-              duration="12 months"
-              students="120"
-              link="/batches/jee-advanced"
-            />
-            <BatchCard
-              title="NEET Preparation"
-              description="Complete syllabus coverage with regular tests and personalized feedback."
-              image="/placeholder.svg?height=200&width=400"
-              duration="15 months"
-              students="150"
-              link="/batches/neet"
-            />
-            <BatchCard
-              title="Foundation Course"
-              description="Build strong fundamentals for students in classes 9th and 10th."
-              image="/placeholder.svg?height=200&width=400"
-              duration="24 months"
-              students="200"
-              link="/batches/foundation"
-            />
+            {batches.slice(0, 3).map((batch) => (
+              <BatchCard
+                key={batch.id}
+                title={batch.title}
+                description={batch.description}
+                image={batch.image}
+                duration={batch.duration}
+                students={batch.students}
+                link={batch.link}
+              />
+            ))}
           </div>
         </section>
 
         {/* Why Choose Us */}
-        <section className="py-20 bg-gradient-to-b from-white to-primary/5">
+        <section className="py-20 bg-gradient-to-b from-white to-primary/5 dark:from-background dark:to-primary/5">
           <div className="container">
             <h2 className="text-3xl font-bold text-center mb-4">
               Why <span className="gradient-text">Choose Us</span>
@@ -93,160 +74,67 @@ export default function Home() {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-background p-6 rounded-xl shadow-sm border border-border/40 hover-card group">
-                <div className="h-14 w-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-primary"
-                  >
-                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                  </svg>
+              {features.map((feature) => (
+                <div key={feature.id} className="bg-background p-6 rounded-xl shadow-sm border border-border/40 hover-card group">
+                  <div className="h-14 w-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-primary"
+                    >
+                      {feature.icon === "graduationCap" && (
+                        <g>
+                          <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                          <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                        </g>
+                      )}
+                      {feature.icon === "shield" && (
+                        <g>
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                          <path d="m9 12 2 2 4-4" />
+                        </g>
+                      )}
+                      {feature.icon === "clipboardCheck" && (
+                        <g>
+                          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+                          <rect x="9" y="3" width="6" height="4" rx="2" />
+                          <path d="m9 14 2 2 4-4" />
+                        </g>
+                      )}
+                      {feature.icon === "users" && (
+                        <g>
+                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                          <circle cx="9" cy="7" r="4" />
+                          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </g>
+                      )}
+                      {feature.icon === "book" && (
+                        <g>
+                          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </g>
+                      )}
+                      {feature.icon === "helpCircle" && (
+                        <g>
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                          <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </g>
+                      )}
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-                  Expert Faculty
-                </h3>
-                <p className="text-muted-foreground">
-                  Learn from experienced teachers who are experts in their fields with proven track records.
-                </p>
-              </div>
-              <div className="bg-background p-6 rounded-xl shadow-sm border border-border/40 hover-card group">
-                <div className="h-14 w-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-primary"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-                    <path d="m9 12 2 2 4-4" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-                  Proven Results
-                </h3>
-                <p className="text-muted-foreground">
-                  Our consistent track record of producing top rankers in various competitive exams speaks for itself.
-                </p>
-              </div>
-              <div className="bg-background p-6 rounded-xl shadow-sm border border-border/40 hover-card group">
-                <div className="h-14 w-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-primary"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-                  Regular Assessment
-                </h3>
-                <p className="text-muted-foreground">
-                  Weekly tests and detailed performance analysis to track progress and improve weak areas.
-                </p>
-              </div>
-              <div className="bg-background p-6 rounded-xl shadow-sm border border-border/40 hover-card group">
-                <div className="h-14 w-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-primary"
-                  >
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-                  Small Batch Size
-                </h3>
-                <p className="text-muted-foreground">
-                  Limited students per batch to ensure personalized attention and better learning outcomes.
-                </p>
-              </div>
-              <div className="bg-background p-6 rounded-xl shadow-sm border border-border/40 hover-card group">
-                <div className="h-14 w-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-primary"
-                  >
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-                  Comprehensive Study Material
-                </h3>
-                <p className="text-muted-foreground">
-                  Well-researched and regularly updated study materials designed by subject experts.
-                </p>
-              </div>
-              <div className="bg-background p-6 rounded-xl shadow-sm border border-border/40 hover-card group">
-                <div className="h-14 w-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-primary"
-                  >
-                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <path d="M12 18v-6" />
-                    <path d="M8 15h8" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-                  Doubt Clearing Sessions
-                </h3>
-                <p className="text-muted-foreground">
-                  Regular doubt clearing sessions to ensure no concept remains unclear.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -261,24 +149,15 @@ export default function Home() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <TestimonialCard
-              name="Rahul Sharma"
-              image="/placeholder.svg?height=100&width=100"
-              rank="AIR 45 - JEE Advanced"
-              testimonial="The faculty at Excel Academy is exceptional. Their teaching methodology and personal attention helped me secure a top rank."
-            />
-            <TestimonialCard
-              name="Priya Patel"
-              image="/placeholder.svg?height=100&width=100"
-              rank="AIR 78 - NEET"
-              testimonial="The regular tests and detailed analysis of my performance helped me identify and improve my weak areas. Forever grateful to Excel Academy."
-            />
-            <TestimonialCard
-              name="Amit Singh"
-              image="/placeholder.svg?height=100&width=100"
-              rank="AIR 120 - JEE Advanced"
-              testimonial="The study material provided is comprehensive and covers all aspects of the syllabus. The teachers are always available to clear doubts."
-            />
+            {testimonials.slice(0, 3).map((testimonial) => (
+              <TestimonialCard
+                key={testimonial.id}
+                name={testimonial.name}
+                image={testimonial.image}
+                rank={testimonial.rank}
+                testimonial={testimonial.testimonial}
+              />
+            ))}
           </div>
         </section>
 
@@ -295,12 +174,7 @@ export default function Home() {
               Join Excel Academy today and take the first step towards academic excellence and a successful career.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="rounded-full hover:shadow-lg hover:shadow-white/20 transition-all duration-300"
-                asChild
-              >
+              <Button variant="secondary" size="lg" className="rounded-full hover:shadow-lg hover:shadow-white/20 transition-all duration-300" asChild>
                 <Link href="/contact">Contact Us</Link>
               </Button>
               <Button
@@ -309,14 +183,14 @@ export default function Home() {
                 className="rounded-full bg-transparent border-white text-white hover:bg-white hover:text-primary transition-all duration-300"
                 asChild
               >
-                <Link href="/batches">Explore Batches</Link>
+                <Link href="/enroll">Enroll Now</Link>
               </Button>
             </div>
           </div>
         </section>
 
         {/* Quick Contact */}
-        <section className="py-16 bg-gradient-to-b from-white to-primary/5">
+        <section className="py-16 bg-gradient-to-b from-white to-primary/5 dark:from-background dark:to-primary/5">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex items-center p-6 bg-background rounded-xl shadow-sm border border-border/40 hover-card">
@@ -325,7 +199,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-medium text-lg">Call Us</h3>
-                  <p className="text-muted-foreground">+91 98765 43210</p>
+                  <p className="text-muted-foreground">{contactInfo.phone.primary}</p>
                 </div>
               </div>
               <div className="flex items-center p-6 bg-background rounded-xl shadow-sm border border-border/40 hover-card">
@@ -334,7 +208,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-medium text-lg">Email Us</h3>
-                  <p className="text-muted-foreground">info@excelacademy.com</p>
+                  <p className="text-muted-foreground">{contactInfo.email.primary}</p>
                 </div>
               </div>
               <div className="flex items-center p-6 bg-background rounded-xl shadow-sm border border-border/40 hover-card">
@@ -343,7 +217,9 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-medium text-lg">Visit Us</h3>
-                  <p className="text-muted-foreground">123 Education St., Knowledge City</p>
+                  <p className="text-muted-foreground">
+                    {contactInfo.address.street}, {contactInfo.address.area}
+                  </p>
                 </div>
               </div>
             </div>
@@ -352,6 +228,5 @@ export default function Home() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
-

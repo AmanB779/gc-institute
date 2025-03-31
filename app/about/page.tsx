@@ -1,10 +1,10 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { CheckCircle } from "lucide-react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import HeroSection from "@/components/hero-section"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { CheckCircle } from "lucide-react";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import HeroSection from "@/components/hero-section";
 
 export default function AboutPage() {
   return (
@@ -23,28 +23,21 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold mb-6">Our Story</h2>
               <div className="space-y-4">
                 <p>
-                  Excel Academy was founded in 2008 by a group of passionate educators with a vision to transform the
-                  coaching landscape by providing quality education that focuses on conceptual understanding rather than
-                  rote learning.
+                  Excel Academy was founded in 2008 by a group of passionate educators with a vision to transform the coaching landscape by providing quality
+                  education that focuses on conceptual understanding rather than rote learning.
                 </p>
                 <p>
-                  What started as a small institute with just 30 students has now grown into one of the most trusted
-                  names in coaching with over 1,200 students enrolling each year and a track record of producing top
-                  rankers in various competitive exams.
+                  What started as a small institute with just 30 students has now grown into one of the most trusted names in coaching with over 1,200 students
+                  enrolling each year and a track record of producing top rankers in various competitive exams.
                 </p>
                 <p>
-                  Our journey has been defined by our commitment to excellence, innovation in teaching methodologies,
-                  and a student-first approach that has helped thousands of students realize their academic dreams.
+                  Our journey has been defined by our commitment to excellence, innovation in teaching methodologies, and a student-first approach that has
+                  helped thousands of students realize their academic dreams.
                 </p>
               </div>
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden">
-              <Image
-                src="/placeholder.svg?height=400&width=600"
-                alt="Excel Academy Building"
-                fill
-                className="object-cover"
-              />
+              <Image src="/placeholder.svg?height=400&width=600" alt="Excel Academy Building" fill className="object-cover" />
             </div>
           </div>
         </section>
@@ -53,16 +46,14 @@ export default function AboutPage() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Our Mission & Vision</h2>
-              <p className="max-w-3xl mx-auto text-muted-foreground">
-                Guiding principles that drive our commitment to educational excellence
-              </p>
+              <p className="max-w-3xl mx-auto text-muted-foreground">Guiding principles that drive our commitment to educational excellence</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-background p-8 rounded-lg shadow-sm">
                 <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
                 <p className="mb-6">
-                  To provide quality education that empowers students to excel academically and develop critical
-                  thinking skills that will serve them throughout their lives.
+                  To provide quality education that empowers students to excel academically and develop critical thinking skills that will serve them throughout
+                  their lives.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -86,8 +77,8 @@ export default function AboutPage() {
               <div className="bg-background p-8 rounded-lg shadow-sm">
                 <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
                 <p className="mb-6">
-                  To be the leading educational institution that transforms students into future leaders by providing
-                  them with the knowledge, skills, and values needed to succeed in a rapidly changing world.
+                  To be the leading educational institution that transforms students into future leaders by providing them with the knowledge, skills, and
+                  values needed to succeed in a rapidly changing world.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -173,18 +164,12 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-background rounded-lg overflow-hidden shadow-sm">
                 <div className="relative h-48">
-                  <Image
-                    src="/placeholder.svg?height=200&width=400"
-                    alt="Modern Classrooms"
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src="/placeholder.svg?height=200&width=400" alt="Modern Classrooms" fill className="object-cover" />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg">Modern Classrooms</h3>
                   <p className="text-muted-foreground">
-                    Spacious, well-ventilated classrooms equipped with modern teaching aids for an optimal learning
-                    environment.
+                    Spacious, well-ventilated classrooms equipped with modern teaching aids for an optimal learning environment.
                   </p>
                 </div>
               </div>
@@ -194,25 +179,17 @@ export default function AboutPage() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg">Science Labs</h3>
-                  <p className="text-muted-foreground">
-                    State-of-the-art laboratories for Physics, Chemistry, and Biology to facilitate practical learning.
-                  </p>
+                  <p className="text-muted-foreground">State-of-the-art laboratories for Physics, Chemistry, and Biology to facilitate practical learning.</p>
                 </div>
               </div>
               <div className="bg-background rounded-lg overflow-hidden shadow-sm">
                 <div className="relative h-48">
-                  <Image
-                    src="/placeholder.svg?height=200&width=400"
-                    alt="Digital Library"
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src="/placeholder.svg?height=200&width=400" alt="Digital Library" fill className="object-cover" />
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg">Digital Library</h3>
                   <p className="text-muted-foreground">
-                    Comprehensive digital library with access to a vast collection of books, journals, and online
-                    resources.
+                    Comprehensive digital library with access to a vast collection of books, journals, and online resources.
                   </p>
                 </div>
               </div>
@@ -226,8 +203,8 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold mb-6">Our Achievements</h2>
               <div className="space-y-4">
                 <p>
-                  Over the years, Excel Academy has established itself as a premier coaching institute with a consistent
-                  track record of producing top rankers in various competitive exams.
+                  Over the years, Excel Academy has established itself as a premier coaching institute with a consistent track record of producing top rankers
+                  in various competitive exams.
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-start">
@@ -268,8 +245,7 @@ export default function AboutPage() {
           <div className="container text-center">
             <h2 className="text-3xl font-bold mb-4">Join Excel Academy Today</h2>
             <p className="max-w-2xl mx-auto mb-8">
-              Take the first step towards academic excellence and a successful career. Our expert faculty and proven
-              methodology await you.
+              Take the first step towards academic excellence and a successful career. Our expert faculty and proven methodology await you.
             </p>
             <Button variant="secondary" size="lg" asChild>
               <Link href="/contact">Contact Us</Link>
@@ -279,6 +255,5 @@ export default function AboutPage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
-

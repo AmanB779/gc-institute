@@ -1,25 +1,30 @@
-import Link from "next/link"
-import { Phone, Mail, MapPin, ArrowRight } from "lucide-react"
+import Link from "next/link";
+import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { navigation } from "@/db/data/navigation";
+import { batches } from "@/db/data/batches";
+import { contactInfo } from "@/db/data/contact";
 
 export default function Footer() {
+  // Get unique categories from batches
+  const categories = [...new Set(batches.map((batch) => batch.category))];
+
   return (
     <footer className="bg-gradient-to-b from-primary/5 to-background border-t">
       <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <Link href="/" className="flex items-center space-x-2 group">
-              <span className="text-2xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
-                Excel
-              </span>
+              <span className="text-2xl font-bold text-primary transition-all duration-300 group-hover:scale-110">Excel</span>
               <span className="text-2xl font-bold transition-all duration-300 group-hover:text-primary">Academy</span>
             </Link>
             <p className="mt-4 text-muted-foreground">
-              Empowering students to achieve academic excellence and build a successful career through quality education
-              and personalized guidance.
+              Empowering students to achieve academic excellence and build a successful career through quality education and personalized guidance.
             </p>
             <div className="mt-6 flex space-x-4">
               <Link
-                href="#"
+                href={contactInfo.socialMedia.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300"
               >
                 <svg
@@ -37,7 +42,9 @@ export default function Footer() {
                 </svg>
               </Link>
               <Link
-                href="#"
+                href={contactInfo.socialMedia.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300"
               >
                 <svg
@@ -57,7 +64,9 @@ export default function Footer() {
                 </svg>
               </Link>
               <Link
-                href="#"
+                href={contactInfo.socialMedia.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300"
               >
                 <svg
@@ -75,7 +84,9 @@ export default function Footer() {
                 </svg>
               </Link>
               <Link
-                href="#"
+                href={contactInfo.socialMedia.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300"
               >
                 <svg
@@ -101,60 +112,14 @@ export default function Footer() {
               <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></span>
             </h3>
             <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/batches"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  Batches
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/toppers"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  Toppers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/notes"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  Notes
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  Contact Us
-                </Link>
-              </li>
+              {navigation.main.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-muted-foreground hover:text-primary transition-colors flex items-center group">
+                    <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
@@ -163,60 +128,17 @@ export default function Footer() {
               <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></span>
             </h3>
             <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/batches/jee-main"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  JEE Main
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/batches/jee-advanced"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  JEE Advanced
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/batches/neet"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  NEET
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/batches/foundation-9-10"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  Foundation (Class 9-10)
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/batches/foundation-11-12"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  Foundation (Class 11-12)
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/batches/olympiad"
-                  className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
-                >
-                  <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
-                  Olympiad Preparation
-                </Link>
-              </li>
+              {categories.map((category) => (
+                <li key={category}>
+                  <Link
+                    href={`/batches/${category.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="text-muted-foreground hover:text-primary transition-colors flex items-center group"
+                  >
+                    <ArrowRight className="h-3 w-0 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-2 text-primary" />
+                    {category}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
@@ -230,22 +152,22 @@ export default function Footer() {
                   <MapPin className="h-4 w-4 text-primary" />
                 </div>
                 <span className="text-muted-foreground">
-                  123 Education Street, Knowledge Park,
+                  {contactInfo.address.street}, {contactInfo.address.area},
                   <br />
-                  Academic City - 123456
+                  {contactInfo.address.city} - {contactInfo.address.pincode}
                 </span>
               </li>
               <li className="flex items-center">
                 <div className="h-8 w-8 bg-primary/10 rounded-full flex items-center justify-center mr-3">
                   <Phone className="h-4 w-4 text-primary" />
                 </div>
-                <span className="text-muted-foreground">+91 98765 43210</span>
+                <span className="text-muted-foreground">{contactInfo.phone.primary}</span>
               </li>
               <li className="flex items-center">
                 <div className="h-8 w-8 bg-primary/10 rounded-full flex items-center justify-center mr-3">
                   <Mail className="h-4 w-4 text-primary" />
                 </div>
-                <span className="text-muted-foreground">info@excelacademy.com</span>
+                <span className="text-muted-foreground">{contactInfo.email.primary}</span>
               </li>
             </ul>
           </div>
@@ -253,23 +175,17 @@ export default function Footer() {
       </div>
       <div className="border-t py-6">
         <div className="container flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Excel Academy. All rights reserved.
-          </p>
+          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Excel Academy. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 sm:mt-0">
             <Link href="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Privacy Policy
             </Link>
-            <Link
-              href="/terms-conditions"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
+            <Link href="/terms-conditions" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Terms & Conditions
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
